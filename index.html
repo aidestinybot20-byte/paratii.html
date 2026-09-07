@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi enamorada?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
 
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+        }
+
+        .tarjeta {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #b3003b;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        p {
+            color: #444;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 12px 35px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        #btnSi {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #btnSi:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        #btnNo {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .respuesta {
+            margin-top: 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #b3003b;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tarjeta">
+        <h1>¿Quieres ser mi enamorada?</h1>
+        <p>Solo quería decirte algo que me guardé por un tiempo. Me gustas, y cada día que te veo, me gustas un poquito más.</p>
+        
+        <div class="botones">
+            <button id="btnSi">Sí</button>
+            <button id="btnNo">No</button>
+        </div>
+
+        <div class="respuesta" id="mensajeRespuesta"></div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btnSi');
+        const btnNo = document.getElementById('btnNo');
+        const mensajeRespuesta = document.getElementById('mensajeRespuesta');
+
+        // Cuando le dan "Sí"
+        btnSi.addEventListener('click', () => {
+            mensajeRespuesta.style.display = 'block';
+            mensajeRespuesta.textContent = '¡Sabía que dirías que SÍ! 🥰❤️ ¡Te amo mucho!';
+            btnSi.disabled = true;
+            btnNo.style.display = 'none';
+        });
+
+        // El botón "No" se mueve cuando intentas darle
+        let contadorNo = 0;
+        btnNo.addEventListener('mouseover', () => {
+            contadorNo++;
+            // Cada vez que se acercan, cambia de posición aleatoria
+            const aleatorioX = Math.floor(Math.random() * 200) - 100;
+            const aleatorioY = Math.floor(Math.random() * 200) - 100;
+            btnNo.style.transform = `translate(${aleatorioX}px, ${aleatorioY}px)`;
+
+            // Mensajes que cambian cada vez que intentas darle a "No"
+            const frases = [
+                '¡Uy! se me movió 😜',
+                '¡No puedes decir que no! 😝',
+                '¡Intenta otra vez! 🤭',
+                '¡El destino dice que SÍ! 😍',
+                '¡Ya no se puede escapar! 🫶'
+            ];
+            btnNo.textContent = frases[Math.min(contadorNo, frases.length - 1)];
+        });
+
+        // Si logran darle (difícil)
+        btnNo.addEventListener('click', () => {
+            mensajeRespuesta.style.display = 'block';
+            mensajeRespuesta.textContent = '¿Segura? 🥺💔... ¡Igual te voy a querer siempre!';
+        });
+    </script>
+</body>
+</html>
